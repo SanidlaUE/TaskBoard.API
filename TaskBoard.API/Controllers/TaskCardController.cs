@@ -15,5 +15,12 @@ namespace TaskBoard.API.Controllers
         {
             _taskCardService = taskCardService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTaskCards()
+        {
+            var cards = await _taskCardService.GetAllTaskCards();
+            return Ok(cards);
+        }
     }
 }
