@@ -22,5 +22,16 @@ namespace TaskBoard.API.Controllers
             var cards = await _taskCardService.GetAllTaskCards();
             return Ok(cards);
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateTaskCard(TaskCardDto taskCardDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await _taskCardService.Create(taskCardDto);
+            return CreatedAtAction(nameof(GetTaskCards), new {id = taskCardDto.Id},taskCardDto);
+        }
+
     }
 }

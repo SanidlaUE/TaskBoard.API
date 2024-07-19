@@ -1,6 +1,7 @@
 ﻿using TaskBoard.Core.Models;
 using TaskBoard.DAL.Entities;
 using AutoMapper;
+using TaskBoard.BLL.DTO;
 
 namespace TaskBoard.DAL.Configuration
 {
@@ -24,8 +25,9 @@ namespace TaskBoard.DAL.Configuration
     {
         public TaskCardDtoToEntityProfile()
         {
-            CreateMap<TaskCardEntity, TaskCardEntity>()
+            CreateMap<TaskCardDto, TaskCardEntity>()
                 .ReverseMap();
         }
     }
+
 }

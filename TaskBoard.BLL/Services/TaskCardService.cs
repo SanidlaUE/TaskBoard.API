@@ -29,7 +29,7 @@ namespace TaskBoard.BLL.Services
         public async Task Create(TaskCardDto taskCardDto)
         {
             var taskCardEntity = _mapper.Map<TaskCardEntity>(taskCardDto);
-            await _taskCardsRepository.Create(taskCardEntity);
+            await _taskCardsRepository.Create(taskCardEntity);           
         }
         public async Task Update(TaskCardDto taskCardDto)
         {

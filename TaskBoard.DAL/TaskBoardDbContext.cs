@@ -9,7 +9,8 @@ namespace TaskBoard.DAL
         public TaskBoardDbContext(DbContextOptions<TaskBoardDbContext> options)
             : base(options)
         {
-
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
         public DbSet<TaskCardEntity> Tasks { get; set; }
     }
