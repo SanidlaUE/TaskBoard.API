@@ -12,8 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(TaskCardToDtoProfile), typeof(TaskCardToEntityProfile), typeof(TaskCardDtoToEntityProfile));
-builder.Services.AddScoped<ITaskCardService<TaskCardDto>, TaskCardService>();
+builder.Services.AddAutoMapper(typeof(TaskCardEntityToResponseProfile), typeof(TaskCardRequestToEntityProfile));
+builder.Services.AddScoped<ITaskCardService<TaskCardResponse,TaskCardRequest>, TaskCardService>();
 builder.Services.AddScoped<ITaskCardsRepository<TaskCardEntity>, TaskCardsRepository>();
 
 builder.Services.AddDbContext<TaskBoardDbContext>(

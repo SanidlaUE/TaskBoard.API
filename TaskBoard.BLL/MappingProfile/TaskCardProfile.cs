@@ -5,27 +5,19 @@ using TaskBoard.BLL.DTO;
 
 namespace TaskBoard.DAL.Configuration
 {
-    public class TaskCardToDtoProfile : Profile
+    public class TaskCardEntityToResponseProfile : Profile
     {
-        public TaskCardToDtoProfile()
+        public TaskCardEntityToResponseProfile()
         {
-            CreateMap<TaskCard, TaskCardEntity>()
+            CreateMap<TaskCardEntity, TaskCardResponse>()
                 .ReverseMap();
         }
     }
-    public class TaskCardToEntityProfile : Profile
+    public class TaskCardRequestToEntityProfile : Profile
     {
-        public TaskCardToEntityProfile()
+        public TaskCardRequestToEntityProfile()
         {
-            CreateMap<TaskCard, TaskCardEntity>()
-                .ReverseMap();
-        }
-    }
-    public class TaskCardDtoToEntityProfile : Profile
-    {
-        public TaskCardDtoToEntityProfile()
-        {
-            CreateMap<TaskCardDto, TaskCardEntity>()
+            CreateMap<TaskCardRequest, TaskCardEntity>()
                 .ReverseMap();
         }
     }

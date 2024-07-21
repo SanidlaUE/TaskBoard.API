@@ -5,7 +5,7 @@
         Task<IEnumerable<TCardEntity>> GetAll();
         Task<TCardEntity> GetById(int id);
         Task Create(TCardEntity entity);
-        Task Update(TCardEntity entity);
+        Task UpdateTaskAsync(TCardEntity entity);
         Task Delete(int id);
 
     }

@@ -28,7 +28,7 @@ namespace TaskBoard.DAL.Repositories
             await _context.Tasks.AddAsync(taskCardEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task Update(TaskCardEntity taskCardEntity)
+        public async Task UpdateTaskAsync(TaskCardEntity taskCardEntity)
         {
             await _context.Tasks
                 .Where(b => b.Id == taskCardEntity.Id)

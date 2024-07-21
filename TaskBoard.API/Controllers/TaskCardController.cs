@@ -9,9 +9,9 @@ namespace TaskBoard.API.Controllers
     [Route("[controller]")]
     public class TaskCardController : ControllerBase
     {
-        private readonly ITaskCardService<TaskCardDto> _taskCardService;
+        private readonly ITaskCardService<TaskCardResponse, TaskCardRequest> _taskCardService;
 
-        public TaskCardController(ITaskCardService<TaskCardDto> taskCardService)
+        public TaskCardController(ITaskCardService<TaskCardResponse, TaskCardRequest> taskCardService)
         {
             _taskCardService = taskCardService;
         }
@@ -30,8 +30,22 @@ namespace TaskBoard.API.Controllers
                 return BadRequest(ModelState);
             }
             await _taskCardService.Create(taskCardDto);
-            return CreatedAtAction(nameof(GetTaskCards), new {id = taskCardDto.Id},taskCardDto);
+            return Ok();
         }
-
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTaskCard(int id,TaskCardDto taskCardDto)
+        {
+            if(!ModelState.IsValid)
+            {
+            return BadRequest(ModelState); 
+            }
+            var existingTaskCard = await _taskCardService.GetById(id);
+            if (existingTaskCard != null)
+            {
+                return NotFound();
+            }
+            await _taskCardService.Update(id,taskCardDto);
+            return NoContent();
+        }
     }
 }

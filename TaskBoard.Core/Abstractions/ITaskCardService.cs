@@ -1,10 +1,13 @@
 ﻿namespace TaskBoard.Core.Abstractions
-{    public interface ITaskCardService<TCardDto> where TCardDto : class
+{
+    public interface ITaskCardService<TCardResponse, TCardRequest> 
+        where TCardResponse : class
+        where TCardRequest : class
     {
-        Task Create(TCardDto tCardDto);
+        Task Create(TCardRequest request);
         Task Delete(int id);
-        Task<IEnumerable<TCardDto>> GetAllTaskCards();
-        Task<TCardDto> GetById(int id);
-        Task Update(TCardDto tCardDto);
+        Task<IEnumerable<TCardResponse>> GetAllTaskCards();
+        Task<TCardResponse> GetById(int id);
+        Task Update(int id, TCardRequest request);
     }
 }
