@@ -17,7 +17,7 @@ namespace TaskBoard.DAL.Repositories
                         .AsNoTracking()
                         .ToListAsync();
         }
-        public async Task<TaskCardEntity> GetById(int id)
+        public async Task<TaskCardEntity> GetById(Guid id)
         {
             return await _context.Tasks
                         .AsNoTracking()
@@ -28,24 +28,25 @@ namespace TaskBoard.DAL.Repositories
             await _context.Tasks.AddAsync(taskCardEntity);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateTaskAsync(TaskCardEntity taskCardEntity)
+        public async Task<Guid> UpdateTaskAsync(Guid id,TaskCardEntity taskCardEntity)
         {
             await _context.Tasks
-                .Where(b => b.Id == taskCardEntity.Id)
+                .Where(b => b.Id == id)
                 .ExecuteUpdateAsync(s => s
                 .SetProperty(b => b.Title, b => taskCardEntity.Title)
                 .SetProperty(b => b.Description, b => taskCardEntity.Description)
                 .SetProperty(b => b.DueDate, b => taskCardEntity.DueDate)
                 .SetProperty(b => b.Priority, b => taskCardEntity.Priority)
                 .SetProperty(b => b.Status, b => taskCardEntity.Status));
-            await _context.SaveChangesAsync();
+           return id;
         }
-        public async Task Delete(int id)
+        public async Task<Guid> Delete(Guid id)
         {
             await _context.Tasks
                 .Where(b => b.Id == id)
                 .ExecuteDeleteAsync();
             await _context.SaveChangesAsync();
+            return id;
         }
     }
 }

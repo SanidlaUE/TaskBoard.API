@@ -5,9 +5,9 @@
         where TCardRequest : class
     {
         Task Create(TCardRequest request);
-        Task Delete(int id);
+        Task<Guid> Delete(Guid id);
         Task<IEnumerable<TCardResponse>> GetAllTaskCards();
-        Task<TCardResponse> GetById(int id);
-        Task Update(int id, TCardRequest request);
+        Task<TCardResponse> GetById(Guid id);
+        Task<Guid> Update(Guid id, TCardRequest request);
     }
 }

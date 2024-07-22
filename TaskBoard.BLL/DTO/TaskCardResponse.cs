@@ -4,7 +4,7 @@ namespace TaskBoard.BLL.DTO
 {
     public class TaskCardResponse
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [StringLength(100)]
         public string Title { get; set; }

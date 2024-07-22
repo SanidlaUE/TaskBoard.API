@@ -23,29 +23,25 @@ namespace TaskBoard.API.Controllers
             return Ok(cards);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateTaskCard(TaskCardDto taskCardDto)
+        public async Task<IActionResult> CreateTaskCard(TaskCardRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _taskCardService.Create(taskCardDto);
+            await _taskCardService.Create(request);
             return Ok();
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTaskCard(int id,TaskCardDto taskCardDto)
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateTaskCard(Guid id, TaskCardRequest request)
         {
-            if(!ModelState.IsValid)
-            {
-            return BadRequest(ModelState); 
-            }
-            var existingTaskCard = await _taskCardService.GetById(id);
-            if (existingTaskCard != null)
-            {
-                return NotFound();
-            }
-            await _taskCardService.Update(id,taskCardDto);
-            return NoContent();
+            var taskId = await _taskCardService.Update(id, request);
+            return Ok(taskId);
         }
-    }
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteTaskCard(Guid id)
+        {
+            return Ok(await _taskCardService.Delete(id));
+        }
+    }   
 }

@@ -3,10 +3,10 @@
     public interface ITaskCardsRepository<TCardEntity> where TCardEntity : class
     {
         Task<IEnumerable<TCardEntity>> GetAll();
-        Task<TCardEntity> GetById(int id);
+        Task<TCardEntity> GetById(Guid id);
         Task Create(TCardEntity entity);
-        Task UpdateTaskAsync(TCardEntity entity);
-        Task Delete(int id);
+        Task<Guid> UpdateTaskAsync(Guid id,TCardEntity entity);
+        Task<Guid> Delete(Guid id);
 
     }
 }
